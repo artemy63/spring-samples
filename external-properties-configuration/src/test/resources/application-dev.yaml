@@ -1,0 +1,23 @@
+custom:
+  owner: "test/resources/application-dev.yaml"
+
+ext-config-properties:
+  whoami: ${custom.owner}
+  #  present in all three configurations
+  property_one: "test/resources/application-dev.yaml :: property_one"
+
+  #  present in application-dev, application and missed in config/application-dev
+  property_two: "test/resources/application-dev.yaml :: property_two from ${owner}"
+
+#  present in application and missed in config/application, application-dev
+#  property_three: "test/resources/application-dev.yaml :: property_three from ${owner}"
+
+#  missed in all configurations
+#  property_four: "test/resources/application-dev.yaml ::  property_four from ${owner}"
+
+another-config-properties:
+  whoami: ${custom.owner}
+  property_one: ${another-config-properties.whoami} property_one
+  property_two: ${another-config-properties.whoami} property_two
+#  property_three: ${another-config-properties.whoami} property_three
+#  property_four: ${another-config-properties.whoami} property_four
